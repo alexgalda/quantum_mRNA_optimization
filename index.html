@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mRNA & Quantum Computing</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --moderna-cyan: #2aace2;
+            --moderna-light-blue: #bfe6f6;
+            --moderna-red: #e31837;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-family: 'Century Gothic', sans-serif;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./img/mRNA_background.png') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: -1;
+            transform: rotate(180deg);
+            transform-origin: center center;
+        }
+
+        .reveal {
+            font-family: 'Century Gothic', sans-serif;
+            color: #333;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--moderna-cyan);
+            font-family: 'Century Gothic', sans-serif;
+            font-size: 2em;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .reveal ul {
+            list-style-type: none;
+        }
+
+        .reveal ul li:before {
+            content: "•";
+            color: var(--moderna-red);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-family: 'Century Gothic', sans-serif;
+            color: #e31837;
+            font-size: 1.5em;
+            z-index: 1000;
+            font-weight: bold;
+            transition: opacity 0.2s ease-in-out;
+            letter-spacing: 0.02em;
+        }
+
+        .header-title:hover {
+            opacity: 0.8;
+            color: #e31837;
+        }
+
+        #logo {
+            width: 150px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            margin-right: 50px;
+        }
+
+        .slide-counter {
+            position: absolute !important;
+            bottom: 14px !important;
+            left: calc(50%) !important;
+            transform: translateX(-50%) !important;
+            color: var(--moderna-red);
+            font-family: 'Century Gothic', sans-serif;
+            font-size: 1.2em;
+            font-weight: bold;
+            z-index: 1001 !important;
+            pointer-events: none;
+        }
+
+        .icon-column {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .icon-column img {
+            width: auto;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .icon-text {
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .navigation-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 100px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-button img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .nav-button:hover img {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <a href="#/0" class="header-title" style="text-decoration: none;">Quantum mRNA Optimization</a>
+    <img src="./img/Moderna Logo.svg" id="logo">
+
+    <div class="navigation-controls">
+        <button class="nav-button" onclick="Reveal.prev()">
+            <img src="./img/left_icon.svg" alt="Previous">
+        </button>
+        <div class="slide-counter">1/1</div>
+        <button class="nav-button" onclick="Reveal.next()">
+            <img src="./img/right_icon.svg" alt="Next">
+        </button>
+    </div>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div class="content-section">
+                    <h1>What is mRNA?</h1>
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-4 icon-column">
+                                <img src="./img/mRNA.svg" style="height: 100px;">
+                                <p class="icon-text">
+                                    mRNA is an essential part of you and <strong>exists in all of your cells</strong>. Your body makes lots of mRNA all the time. mRNA can teach the body how to make its own medicines in the form of <strong>proteins</strong>.
+                                </p>
+                            </div>
+                            <div class="col-md-4 icon-column">
+                                <img src="./img/translation.svg" style="height: 100px;">
+                                <p class="icon-text">
+                                    Each mRNA carries instructions like a "blueprint" to <strong>make a specific protein</strong>. Cells interpret this blueprint and put the protein together. <strong>Antibodies</strong> are one type of protein that help your body <strong>fight diseases</strong>.
+                                </p>
+                            </div>
+                            <div class="col-md-4 icon-column">
+                                <img src="./img/fragile.svg" style="height: 100px;">
+                                <p class="icon-text">
+                                    mRNA is <strong>powerful but fragile</strong>. mRNA stability needs to be carefully optimized to maximize in-cell protein production and the shelf life of the drug product. Once mRNA does its job, it doesn't stay around for very long and is broken down by the body.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid var(--moderna-cyan); margin: 0px 0;">
+                    <div class="reference-link" style="margin-top: 20px;">
+                        <div class="row">
+                            <div class="col-md-6" style="text-align: left;">
+                                <span style="font-family: 'Century Gothic', sans-serif; font-weight: bold; color: black; font-size: 1.2em;">
+                                    mRNA is revolutionizing medicine.
+                                </span>
+                            </div>
+                            <div class="col-md-6" style="text-align: right;">
+                                <span style="font-family: 'Century Gothic', sans-serif; color: black; line-height: 1.5;">
+                                    For more information on mRNA technology,<br>visit 
+                                </span>
+                                <a href="https://aboutmrna.com" target="_blank" style="color: var(--moderna-red); font-family: 'Century Gothic', sans-serif; text-decoration: underline;">
+                                    aboutmrna.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            controls: false,
+            progress: false,
+            slideNumber: false,
+            transition: 'slide',
+            transitionSpeed: 'default'
+        });
+
+        document.querySelector('.slide-counter').textContent = '1/1';
+    </script>
+</body>
+</html>
