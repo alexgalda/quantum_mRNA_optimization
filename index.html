@@ -505,7 +505,7 @@
             display: none;
             position: absolute;
             top: 50%;
-            left: 50%; /* Move 10% to the right */
+            left: 55%; /* Move 10% to the right */
             width: 50px;
             height: 50px;
             border: 5px solid rgba(0, 0, 0, 0.1);
@@ -526,7 +526,54 @@
             justify-content: center;
             align-items: center;
             height: 400px; /* Ensure consistent height */
-            transform: translateX(10%); /* Move 10% to the right */
+        }
+
+        /* Media queries for mobile devices */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.2em; /* Adjust font size for smaller screens */
+            }
+
+            .navigation-controls {
+                bottom: 10px; /* Adjust position for smaller screens */
+                gap: 50px; /* Reduce gap between buttons */
+            }
+
+            #logo {
+                bottom: 10px; /* Adjust position for smaller screens */
+                right: 10px; /* Adjust position for smaller screens */
+                width: 80px; /* Further reduce size for smaller screens */
+            }
+
+            .content-section {
+                padding: 20px; /* Reduce padding for smaller screens */
+            }
+
+            .icon-column img {
+                height: 80px; /* Adjust icon size for smaller screens */
+            }
+
+            .quantum-icon {
+                width: 80px; /* Adjust icon size for smaller screens */
+                height: 80px; /* Adjust icon size for smaller screens */
+            }
+
+            .quantum-title {
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+
+            .quantum-content ul li {
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+
+            .simulate-button button, .launch-demo-button {
+                font-size: 0.9em; /* Adjust button font size for smaller screens */
+                padding: 8px 16px; /* Adjust button padding for smaller screens */
+            }
+
+            .rna-info-table th, .rna-info-table td {
+                font-size: 0.9em; /* Adjust table font size for smaller screens */
+            }
         }
     </style>
 </head>
@@ -603,7 +650,7 @@
                                 <img src="./img/mRNA_icon.svg" class="challenge-icon">
                                 <h4 class="mt-4 highlight-red">Secondary Structure Prediction</h4>  <!-- Added highlight-red class -->
                                 <p class="challenge-text">
-                                    <strong>Accurate prediction</strong> of mRNA's secondary structure <strong>is vital</strong> for its functionality in protein synthesis. Advanced computational models are essential for designing mRNA sequences that not only fold as desired but also maintain stability under physiological conditions.
+                                    <strong>Accurate prediction</strong> of mRNA's secondary structure <strong>is vital</strong> for its functionality in protein synthesis. Advanced computational models are essential for designing mRNA sequences that not only fold as desired but also maintain <strong>high stability</strong> under physiological conditions.
                                 </p>
                             </div>
                             <div class="col-md-6 icon-column">
@@ -650,14 +697,14 @@
                                 </div>
                                 <div id="explore-content" class="quantum-content hidden">
                                     <ul>
-                                        <li>Efficient exploration of vast mRNA sequence spaces unveils novel, more diverse, and stable theraoeutic mRNA designs.</li>
+                                        <li>Efficient exploration of vast mRNA sequence spaces unveils novel, more diverse, and stable therapeutic mRNA designs.</li>
                                         <li>Quantum algorithms evaluate multiple design candidates simultaneously, accelerating search and improving the selection of effective sequences.</li>
                                         <li>Quantum computing has the potential to accelerate mRNA drug discovery by enhancing the efficiency of mRNA optimization.</li>
                                     </ul>
                                 </div>
                                 <div id="diversity-content" class="quantum-content hidden">
                                     <ul>
-                                        <li>Broader diversity of mRNA designs enables discovery of higher-quality mRNA designs with optimal therapeutic properties.</li>
+                                        <li>Broader diversity of mRNA sequences enables discovery of higher-quality mRNA designs with optimal therapeutic properties.</li>
                                         <li>Quantum computing could enable rapid evaluation of diverse molecular configurations, enhancing the efficiency of design processes.</li>
                                         <li>Enhanced sampling methods made possible by quantum computing may improve the quality of the final therapeutic candidates.</li>
                                     </ul>
@@ -682,10 +729,10 @@
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-overview" role="tabpanel" aria-labelledby="v-pills-overview-tab">
-                            <p style="font-size: 1.1em; line-height: 1.6;">mRNA structure prediction involves calculating the <strong>most stable</strong> configuration of nucleotide sequences. The <strong>lowest energy</strong> folding is indicative of the molecule's natural state, crucial for its biological function.</p>
+                            <p style="font-size: 1.1em; line-height: 1.6;">mRNA structure prediction involves calculating the <strong>most stable</strong> configuration of nucleotide sequences. The <strong>lowest energy</strong> folding is indicative of the molecule's equilibrium state, crucial for its biological function.</p>
                         </div>
                         <div class="tab-pane fade" id="v-pills-methodology" role="tabpanel" aria-labelledby="v-pills-methodology-tab">
-                            <p style="font-size: 1.1em; line-height: 1.6;">To determine the lowest energy conformation, <strong>nearest-neighbor rules</strong> are utilized. These rules evaluate the individual energy contributions from secondary structure motifs like loops, stems, and bulges, which collectively determine the total energy function and predict the natural folding of the mRNA.</p>
+                            <p style="font-size: 1.1em; line-height: 1.6;">To determine the lowest energy conformation, <strong>nearest-neighbor rules</strong> are utilized. These rules evaluate the individual energy contributions from secondary structure motifs like loops, stems, and bulges, which collectively determine the total energy function and predict the most probable folding of the mRNA.</p>
                         </div>
                         <div class="tab-pane fade" id="v-pills-complexity" role="tabpanel" aria-labelledby="v-pills-complexity-tab">
                             <p style="font-size: 1.1em; line-height: 1.6;">The number of possible secondary structures an mRNA can adopt is estimated as 2.3<sup>n</sup>, where n is the length of the sequence. A typical 2,000-nucleotide therapeutic mRNA can theoretically assume an <strong>astronomical number of structures</strong>.</p>
