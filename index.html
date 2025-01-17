@@ -537,12 +537,21 @@
 
             .navigation-controls {
                 bottom: 10px; /* Adjust position for smaller screens */
-                gap: 50px; /* Reduce gap between buttons */
+                gap: 30px; /* Reduce gap between buttons */
+            }
+
+            .nav-button {
+                width: 40px; /* Reduce size for smaller screens */
+                height: 40px; /* Reduce size for smaller screens */
+            }
+
+            .slide-counter {
+                font-size: 0.7em; /* Reduce font size for smaller screens */
             }
 
             #logo {
                 bottom: 10px; /* Adjust position for smaller screens */
-                right: 10px; /* Adjust position for smaller screens */
+                right: -10px; /* Adjust position for smaller screens */
                 width: 80px; /* Further reduce size for smaller screens */
             }
 
@@ -574,6 +583,11 @@
 
             .rna-info-table th, .rna-info-table td {
                 font-size: 0.9em; /* Adjust table font size for smaller screens */
+            }
+
+            .reveal .slides section {
+                width: 100%; /* Adjust width for smaller screens */
+                height: auto; /* Adjust height for smaller screens */
             }
         }
     </style>
@@ -876,7 +890,7 @@
                     </div>
                     <br>
                 </div>
-                <div class="col-md-5 d-flex justify-content-center" style="margin-bottom: -10%; transform: translateX(5%);"> <!-- Move 10% to the right -->
+                <div class="col-md-5 d-flex justify-content-center" style="margin-bottom: -10%; transform: translateX(5%);"> <!-- Move 5% to the right -->
                     <div class="spinner-container">
                         <div class="spinner" id="spinner"></div>
                         <img id="rna-img" src="" style="height: 400px; width: auto;">
