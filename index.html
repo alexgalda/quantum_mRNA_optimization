@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mRNA & Quantum Computing</title>
+    <title>Quantum mRNA Optimization</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -60,9 +60,9 @@
             background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
             padding: 30px;
             border-radius: 8px;
-            /* Removed box-shadow */
             margin: 0 auto; /* Center the content */
             max-width: 100%; /* Ensure content doesn't overflow */
+            height: auto; /* Adjust height to content */
         }
 
         .reveal ul {
@@ -74,29 +74,6 @@
             color: var(--moderna-red);
             font-weight: bold;
             margin-right: 10px;
-        }
-
-        .iframe-container {
-            position: relative;
-            box-sizing: border-box;
-            overflow: hidden;
-            width: 520px;
-            height: 520px;
-            margin: -10px;
-            /* margin-top: 10px; */
-            margin-right: -150px; /* Move further to the right */
-            /* border: 1px solid var(--moderna-cyan);*/ /* Add border */
-            /* border-radius: 15px;*/ /* Add rounded corners */
-        }
-
-        iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;  /* Increase the width to scale the content */
-            height: 120%; /* Increase the height to scale the content */
-            transform: translate(-50%, -50%) scale(1.21); /* Center and scale the content */
-            border: none;
         }
 
         #structure-selector {
@@ -161,6 +138,7 @@
         .icon-column {
             text-align: center;
             padding: 20px;
+            margin-bottom: 0; /* Remove bottom margin */
         }
 
         .icon-column img {
@@ -223,6 +201,7 @@
             cursor: pointer;
             transition: opacity 0.3s ease;
             opacity: 1.0;  /* Increased from 0.5 to reduce transparency */
+            margin-bottom: 0; /* Remove bottom margin */
         }
 
         .quantum-column:hover {
@@ -445,7 +424,8 @@
         .simulate-button {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px; /* Reduced margin-top */
+            margin-bottom: 10px; /* Reduced margin-bottom */
         }
 
         .simulate-button button {
@@ -499,7 +479,6 @@
             text-align: center;
             width: 120%;
             height: 80%;
-            margin-top: -20px; /* Move the entire slide up by 20px */
         }
 
         .motifs-image {
@@ -507,6 +486,47 @@
             max-width: 600px; /* Reduce the maximum width */
             display: block;
             margin: 0 auto;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align image at the top */
+            width: 100%;
+            height: 100%;
+        }
+        .image-container img {
+            height: 10%;
+            width: auto;
+        }
+
+        /* Add styles for the spinner */
+        .spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Move 10% to the right */
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--moderna-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .spinner-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px; /* Ensure consistent height */
+            transform: translateX(10%); /* Move 10% to the right */
         }
     </style>
 </head>
@@ -516,11 +536,11 @@
     <img src="./img/Moderna Logo.svg" id="logo">
 
     <div class="navigation-controls">
-        <button class="nav-button" onclick="Reveal.prev()">
+        <button class="nav-button" id="prev-button" onclick="Reveal.prev()" style="visibility: hidden;">
             <img src="./img/left_icon.svg" alt="Previous">
         </button>
         <div class="slide-counter">1/7</div> <!-- Page counter position -->
-        <button class="nav-button" onclick="Reveal.next()">
+        <button class="nav-button" id="next-button" onclick="Reveal.next()">
             <img src="./img/right_icon.svg" alt="Next">
         </button>
     </div>
@@ -624,8 +644,8 @@
                                 <div id="structure-content" class="quantum-content active">
                                     <ul>
                                         <li>Accurate mRNA structure prediction is crucial for optimal folding, ensuring stability and function, but is computationally intensive for classical systems which often rely on approximations to limit possible secondary structures.</li>
-                                        <li>This task is an NP-complete problem, challenging traditional computational methods with its complexity.</li>
                                         <li>Quantum computing promises to lift some of these limitations by more effectively exploring the solution space, potentially revolutionizing our approach to mRNA design.</li>
+                                        <li>This task is an NP-complete problem, challenging traditional computational methods with its complexity.</li>
                                     </ul>
                                 </div>
                                 <div id="explore-content" class="quantum-content hidden">
@@ -745,7 +765,7 @@
                                 In this demo, we will demonstrate the results of our quantum algorithm for secondary structure prediction for a range of mRNA sequences solved on state-of-the-art utility-scale quantum computers.
                             </p>
                             <p style="font-size: 1.1em; line-height: 1.6;">
-                                Select the mRNA sequence from the drop-down list and review the algorithm parameters and the problem instance details. The interactive screen on the righ will show the mRNA sequence before and after optimization. Click to interact with the displayed mRNA secondary structure.
+                                Select the mRNA sequence from the drop-down list and review the algorithm parameters and the problem instance details. The interactive screen on the righ will show the mRNA sequence before and after optimization.
                             </p>
                             <br>
                             <br>
@@ -757,71 +777,70 @@
 
             <!-- Slide 6: Results -->
             <section>
-                <div class="content-section">
-                    <!-- <h2>Demo Results</h2> -->
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-5">  <!-- Changed from col-md-4 to col-md-5 (approximately 40%) -->
-                                <div class="problem-instance-title">Problem Instance</div>
-                                <select id="structure-selector" class="form-select mb-2" onchange="changeStructure()">
-                                    <option value="mRNA_127">mRNA_127</option>
-                                    <option value="mRNA_120">mRNA_120</option>
-                                    <option value="mRNA_100">mRNA_100</option>
-                                    <option value="mRNA_80">mRNA_80</option>
-                                    <option value="mRNA_50">mRNA_50</option>
-                                    <option value="mRNA_40">mRNA_40</option>
-                                </select>
-                                <div class="quantum-algorithm">Quantum Algorithm</div>
-                                <div class="radio-container">
-                                    <input type="radio" id="cvar-vqe" name="quantum-algorithm" value="CVaR VQE" checked>
-                                    <label for="cvar-vqe">CVaR VQE</label>
-                                </div>
-                                <div class="sub-columns">
-                                    <div class="sub-column">
-                                        <div class="ansatz-title">Ansatz</div>
-                                        <div class="radio-container">
-                                            <input type="radio" id="two-local" name="ansatz" value="Two-local (depth 2)" checked>
-                                            <label for="two-local">Two-local (depth 2)</label>
-                                        </div>
-                                    </div>
-                                    <div class="sub-column">
-                                        <div class="optimizer-title">Optimizer</div>
-                                        <div class="radio-container">
-                                            <input type="radio" id="nft" name="optimizer" value="NFT" checked>
-                                            <label for="nft">NFT</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table table-sm rna-info-table" style="border-top: 1px solid var(--moderna-cyan);"> <!-- Added top border to the table -->
-                                    <tbody>
-                                        <tr><th>Sequence</th><td id="sequence" style="padding: 10px 8px;"></td></tr> <!-- Added padding -->
-                                        <tr><th>Length</th><td id="len"></td></tr>
-                                        <tr><th>Number of Constraints</th><td id="constraints"></td></tr>
-                                        <tr><th>QPU Backend</th><td id="backend"></td></tr>
-                                        <tr><th>Number of Qubits</th><td id="qubits"></td></tr>
-                                        <tr><th>Normalized Energy</th><td id="energy"></td></tr>
-                                    </tbody>
-                                </table>
-                                <br>
-                                <div class="simulate-button">
-                                    <button id="simulate-button" onclick="simulate()">Simulate</button>
-                                </div>
+    <div class="content-section" style="padding-bottom: 0; margin-bottom: 0;">
+        <!-- <h2>Demo Results</h2> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">  <!-- Changed from col-md-4 to col-md-5 (approximately 40%) -->
+                    <div class="problem-instance-title">Problem Instance</div>
+                    <select id="structure-selector" class="form-select mb-2" onchange="changeStructure()">
+                        <option value="mRNA_127">mRNA_127</option>
+                        <option value="mRNA_120">mRNA_120</option>
+                        <option value="mRNA_100">mRNA_100</option>
+                        <option value="mRNA_80">mRNA_80</option>
+                        <option value="mRNA_50">mRNA_50</option>
+                        <option value="mRNA_40">mRNA_40</option>
+                    </select>
+                    <div class="quantum-algorithm">Quantum Algorithm</div>
+                    <div class="radio-container">
+                        <input type="radio" id="cvar-vqe" name="quantum-algorithm" value="CVaR VQE" checked>
+                        <label for="cvar-vqe">CVaR VQE</label>
+                    </div>
+                    <div class="sub-columns">
+                        <div class="sub-column">
+                            <div class="ansatz-title">Ansatz</div>
+                            <div class="radio-container">
+                                <input type="radio" id="two-local" name="ansatz" value="Two-local (depth 2)" checked>
+                                <label for="two-local">Two-local (depth 2)</label>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-center">  <!-- Changed from col-md-8 to col-md-7 -->
-                                <div class="iframe-container">
-                                    <iframe src="http://rna.tbi.univie.ac.at/forna/forna.html?id=share/8111998274ec44d8abfe223e1e8b384a"
-                                            id="rna-iframe"
-                                            frameborder="0"
-                                            style="width: 100%; height: 100%;"></iframe>  <!-- Ensure iframe takes full container size -->
-                                </div>
+                        </div>
+                        <div class="sub-column">
+                            <div class="optimizer-title">Optimizer</div>
+                            <div class="radio-container">
+                                <input type="radio" id="nft" name="optimizer" value="NFT" checked>
+                                <label for="nft">NFT</label>
                             </div>
                         </div>
                     </div>
+                    <table class="table table-sm rna-info-table" style="border-top: 1px solid var(--moderna-cyan);"> <!-- Added top border to the table -->
+                        <tbody>
+                            <tr><th>Sequence</th><td id="sequence" style="padding: 10px 8px;"></td></tr> <!-- Added padding -->
+                            <tr><th>Length</th><td id="len"></td></tr>
+                            <tr><th>Number of Constraints</th><td id="constraints"></td></tr>
+                            <tr><th>QPU Backend</th><td id="backend"></td></tr>
+                            <tr><th>Number of Qubits</th><td id="qubits"></td></tr>
+                            <tr><th>Normalized Energy</th><td id="energy"></td></tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="simulate-button">
+                        <button id="simulate-button" onclick="simulate()">Simulate</button>
+                    </div>
+                    <br>
                 </div>
-            </section>
+                <div class="col-md-5 d-flex justify-content-center" style="margin-bottom: -10%;"> <!-- Reduced margin-bottom -->
+                    <div class="spinner-container">
+                        <div class="spinner" id="spinner"></div>
+                        <img id="rna-img" src="" style="height: 400px; width: auto;">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
+</section>
+</section>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -830,12 +849,12 @@
         }
 
         const sequenceInfo = {
-            'mRNA_127': {'sequence': 'GAGCAGCCUGCUCGGUAUGCCCUGUUCGACUCCUGGCAGGGCAAC', 'seq_name': 'seq_1341', 'len': 45, 'qubits': 127, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 6289, 'energy': -13.1, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/78ecf74237de4350a152a1992ebd6b98', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/6537536aad49430889e0b0f5752edaa7'},
-            'mRNA_120': {'sequence': 'AUCCAUCAGUGGUACUGCAUGAUGCCCAUCUGCAUGGCCAAGAGG', 'seq_name': 'seq_9246', 'len': 45, 'qubits': 120, 'backend': 'IBM Torino (133Q)', 'constraints': 5427, 'energy': -9.6, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/5a43bbf7ffc04198b6aa6c1989053bf0', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/471e4f4ba2b04223b39a1524460e2770'},
-            'mRNA_100': {'sequence': 'AUCUGGUCUAAUAAUCUGUAUCUGCGCCCAUUUCAGUUUAUCCAU', 'seq_name': 'seq_1033', 'len': 45, 'qubits': 100, 'backend': 'IBM Brussels (127Q)', 'constraints': 3667, 'energy': -2.7, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/0867377b248048a4a09e7707529d7f05', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/7c0de52513394a08a923f4139ae56a21'},
-            'mRNA_80': {'sequence': 'CCAUUUAUACCCCGGGCCGCCUACUGCACCCAGUGUAACAUG', 'seq_name': 'seq_6628', 'len': 42, 'qubits': 80, 'backend': 'IBM Nazca (127Q)', 'constraints': 2345, 'energy': -140.0, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/575077e643b64bbaac7894dd7a1cdfbc', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/45cf627fb924498a8d200542cb70be32'},
-            'mRNA_50': {'sequence': 'AAGCCUAUCAACGGCGUGCGCUGUGAUAUG', 'seq_name': 'seq_7906', 'len': 30, 'qubits': 50, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 991, 'energy': -8.4, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/943c294d9b3e4cf087b8bad562afb734', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/a582419bf9314589b521c39429abd5f4'},
-            'mRNA_40': {'sequence': 'UUGCCUCAUAAGCGUCUUACUGAGCCCAAG', 'seq_name': 'seq_2200', 'len': 30, 'qubits': 40, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 608, 'energy': -3.8, 'defaultUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/ea622abd85794e309c339d36622debb4', 'optimizedUrl': 'http://rna.tbi.univie.ac.at/forna/forna.html?id=share/37bae10d216e4c868fed318e20517a42'}
+            'mRNA_127': {'sequence': 'GAGCAGCCUGCUCGGUAUGCCCUGUUCGACUCCUGGCAGGGCAAC', 'seq_name': 'seq_1341', 'len': 45, 'qubits': 127, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 6289, 'energy': -13.1, 'defaultUrl': './img/mRNA_127_default.png', 'optimizedUrl': './img/mRNA_127_optimized.png'},
+            'mRNA_120': {'sequence': 'AUCCAUCAGUGGUACUGCAUGAUGCCCAUCUGCAUGGCCAAGAGG', 'seq_name': 'seq_9246', 'len': 45, 'qubits': 120, 'backend': 'IBM Torino (133Q)', 'constraints': 5427, 'energy': -9.6, 'defaultUrl': './img/mRNA_120_default.png', 'optimizedUrl': './img/mRNA_120_optimized.png'},
+            'mRNA_100': {'sequence': 'AUCUGGUCUAAUAAUCUGUAUCUGCGCCCAUUUCAGUUUAUCCAU', 'seq_name': 'seq_1033', 'len': 45, 'qubits': 100, 'backend': 'IBM Brussels (127Q)', 'constraints': 3667, 'energy': -2.7, 'defaultUrl': './img/mRNA_100_default.png', 'optimizedUrl': './img/mRNA_100_optimized.png'},
+            'mRNA_80': {'sequence': 'CCAUUUAUACCCCGGGCCGCCUACUGCACCCAGUGUAACAUG', 'seq_name': 'seq_6628', 'len': 42, 'qubits': 80, 'backend': 'IBM Nazca (127Q)', 'constraints': 2345, 'energy': -140.0, 'defaultUrl': './img/mRNA_80_default.png', 'optimizedUrl': './img/mRNA_80_optimized.png'},
+            'mRNA_50': {'sequence': 'AAGCCUAUCAACGGCGUGCGCUGUGAUAUG', 'seq_name': 'seq_7906', 'len': 30, 'qubits': 50, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 991, 'energy': -8.4, 'defaultUrl': './img/mRNA_50_default.png', 'optimizedUrl': './img/mRNA_50_optimized.png'},
+            'mRNA_40': {'sequence': 'UUGCCUCAUAAGCGUCUUACUGAGCCCAAG', 'seq_name': 'seq_2200', 'len': 30, 'qubits': 40, 'backend': 'IBM Marrakesh (156Q)', 'constraints': 608, 'energy': -3.8, 'defaultUrl': './img/mRNA_40_default.png', 'optimizedUrl': './img/mRNA_40_optimized.png'}
         };
 
         function changeStructure() {
@@ -849,21 +868,45 @@
             document.getElementById('qubits').textContent = sequenceInfo[selectedOptionText].qubits;
             document.getElementById('energy').textContent = sequenceInfo[selectedOptionText].energy;
 
-            var iframe = document.getElementById('rna-iframe');
-            iframe.src = sequenceInfo[selectedOptionText].defaultUrl;
+            var img = document.getElementById('rna-img');
+            img.src = sequenceInfo[selectedOptionText].defaultUrl;
+            img.style.height = '400px'; // Ensure consistent height
+            img.style.width = 'auto'; // Ensure consistent width
+
+            // Reset Simulate button
+            var button = document.getElementById('simulate-button');
+            button.textContent = "Simulate";
         }
 
         function simulate() {
             var selector = document.getElementById('structure-selector');
             var selectedOptionText = selector.options[selector.selectedIndex].value;
-            var iframe = document.getElementById('rna-iframe');
+            var img = document.getElementById('rna-img');
             var button = document.getElementById('simulate-button');
+            var spinner = document.getElementById('spinner');
 
             if (button.textContent === "Simulate") {
-                iframe.src = sequenceInfo[selectedOptionText].optimizedUrl;
-                button.textContent = "Reset";
+                spinner.style.display = 'block'; // Show spinner
+                img.style.display = 'none'; // Hide image
+
+                // Preload the next image
+                var nextImg = new Image();
+                nextImg.src = sequenceInfo[selectedOptionText].optimizedUrl;
+
+                nextImg.onload = function() {
+                    setTimeout(() => {
+                        img.src = nextImg.src;
+                        img.style.height = '400px'; // Ensure consistent height
+                        img.style.width = 'auto'; // Ensure consistent width
+                        spinner.style.display = 'none'; // Hide spinner
+                        img.style.display = 'block'; // Show image
+                        button.textContent = "Reset";
+                    }, 2000); // Simulate loading time
+                };
             } else {
-                iframe.src = sequenceInfo[selectedOptionText].defaultUrl;
+                img.src = sequenceInfo[selectedOptionText].defaultUrl;
+                img.style.height = '400px'; // Ensure consistent height
+                img.style.width = 'auto'; // Ensure consistent width
                 button.textContent = "Simulate";
             }
         }
@@ -909,14 +952,22 @@
             });
         });
 
+        // Add a variable to track if the demo has been initialized
+        let demoInitialized = false;
+
         Reveal.on('slidechanged', function(event) {
             const currentSlide = event.indexh + 1;
             const totalSlides = document.querySelectorAll('.reveal .slides section').length;
             document.querySelector('.slide-counter').textContent = currentSlide + '/' + totalSlides;
 
-            // Reload iframe content when slide 6 is shown
-            if (currentSlide === 6) {
+            // Show/hide navigation buttons based on the current slide
+            document.getElementById('prev-button').style.visibility = currentSlide === 1 ? 'hidden' : 'visible';
+            document.getElementById('next-button').style.visibility = currentSlide === totalSlides ? 'hidden' : 'visible';
+
+            // Initialize demo only once when first visiting slide 6
+            if (currentSlide === 6 && !demoInitialized) {
                 changeStructure();
+                demoInitialized = true;
             }
         });
 
@@ -962,5 +1013,6 @@
             });
         });
     </script>
+</html>
 </body>
 </html>
