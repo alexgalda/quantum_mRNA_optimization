@@ -269,6 +269,16 @@
             font-size: 1.5em; /* Increased size for prominence */
         }
 
+        .concludions-content ul li:before {
+            content: "•"; /* Custom bullet point symbol */
+            color: var(--moderna-red); /* Moderna Red */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%); /* Vertically center the bullet */
+            font-size: 1.5em; /* Increased size for prominence */
+        }
+
         .quantum-content.hidden {
             display: none;
         }
@@ -590,6 +600,37 @@
                 height: auto; /* Adjust height for smaller screens */
             }
         }
+
+        .conclusions-content {
+            width: 100%;
+            text-align: left;
+        }
+
+        .conclusions-content ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin-right: -150px; /* Extend content to the right */
+            text-align: left;
+        }
+
+        .conclusions-content ul li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .conclusions-content ul li:before {
+            content: "•";
+            color: var(--moderna-red);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8em;
+        }
     </style>
 </head>
 <body>
@@ -900,6 +941,27 @@
         </div>
     </div>
 </section>
+<!-- Slide 7: Conclusions and Outlook -->
+<section class="demo-slide">
+    <div class="content-section">
+        <h2 style="text-align: center;">Conclusions and Outlook</h2>
+        <div class="row" style="min-height: 300px;"> <!-- Add minimum height to ensure proper vertical centering -->
+            <div class="col-md-2 d-flex align-items-center justify-content-center"> <!-- Changed align-items-start back to align-items-center -->
+                <div class="icon-column" style="margin-top: 0;"> <!-- Reset any top margin -->
+                    <img src="./img/goal_icon.svg" alt="Conclusions and Outlook" style="height: 100px; width: auto;">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="conclusions-content active" style="text-align: left;">
+                    <ul>
+                        <li>Accurately predicted mRNA secondary structures with up to 45 nucleotides on utility-scale quantum processers with over 100+ qubits.</li>
+                        <li>Laid the groundwork for future research in quantum-assisted bioinformatics, highlighting the importance of developing scalable quantum algorithms for real-world biological problems.</li>
+                        <li>In the future, it is essential to address technical and algorithmic challenges to scale up the method and approach the problem sizes required for commercial applications.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
         </div>
     </div>
